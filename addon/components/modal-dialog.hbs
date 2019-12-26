@@ -1,0 +1,18 @@
+<div {{did-insert (fn this.modal.register this.guid this)}} {{will-destroy (fn this.modal.unregister this.guid)}}>
+  {{!-- for details on -in-element see: https://github.com/cibernox/rfcs/blob/20d2c89a11d20b7672291569efa2aa6e1697e2fe/text/0000-promote-in-element-to-public-api.md --}}
+  {{#-in-element this.targetElement}}
+    <div class="modal-container {{if this.isOpen "open" "close"}}" tabindex="-1">
+      {{#if this.showBackdrop}}
+        <div class="modal-background" tabindex={{if this.isBackdropClickable "0" "-1"}} {{on "click" this.onBackgroundClick}}></div>
+      {{/if}}
+      <div class="modal-dialog" tabindex="-1" aria-modal="true" role="dialog">
+        {{#if this.showCloseButton}}
+          <button type="button" class="close-modal" aria-label="Close" {{on "click" this.closeModal}}>
+            x
+          </button>
+        {{/if}}
+        {{yield (hash modal=this closeModal=(fn this.closeModal this))}}
+      </div>
+    </div>
+  {{/-in-element}}
+</div>

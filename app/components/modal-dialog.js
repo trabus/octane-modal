@@ -1,0 +1,1 @@
+export { default } from 'octane-modal/components/modal-dialog';

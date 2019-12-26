@@ -1,0 +1,114 @@
+
+.modal-background {
+  background-color: white;
+  opacity: .8;
+}
+
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-background, .modal-container {
+  width: 100vw;
+  height: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.modal-dialog {
+  border: 1px solid grey;
+  background-color: lightgray;
+  padding: 1rem 3rem 0.5rem 2rem;
+  outline: none;
+  position: relative;
+  min-height: 2rem;
+  margin: 80px;
+  margin-top: -40%;
+}
+.modal-dialog .close-modal {
+  cursor: pointer;
+  position: absolute;
+  top: 0.57143rem;
+  right: 0.78571rem;
+}
+
+.modal-background .modal-dialog, .modal-container .modal-dialog {
+  z-index: 1000;
+}
+
+.modal-container.open .modal-dialog {
+  animation: fade-in .5s, drop-in .5s;
+}
+.modal-container.open .modal-background {
+  animation: fade-in-50 .5s;
+  animation-fill-mode: forwards;
+}
+.modal-container.close .modal-dialog {
+  animation: fade-out .2s, drop-out .25s;
+  animation-fill-mode: forwards;
+}
+.modal-container.close .modal-background {
+  animation: fade-out-50 .5s;
+}
+
+.no-scroll {
+  position: fixed;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in-50 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: .5;
+  }
+}
+
+@keyframes fade-out-50 {
+  0% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes drop-in {
+  0% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes drop-out {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-40px);
+  }
+}
