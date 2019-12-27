@@ -75,6 +75,9 @@ export default class ModalDialogComponent extends Component {
     }, this.closeDuration);
   }
 
+  /**
+   * Handle opening modal
+   */
   @action
   openModal() {
     this.isOpen = true;
