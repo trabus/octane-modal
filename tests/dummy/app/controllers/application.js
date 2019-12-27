@@ -7,7 +7,6 @@ export default class ApplicationController extends Controller {
 
   @action
   onCloseModal() {
-    console.log('on close modal', [...arguments])
     this.modal.openModal("test1");
   }
 }

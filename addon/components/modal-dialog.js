@@ -4,7 +4,6 @@ import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { guidFor } from '@ember/object/internals';
 import { later } from '@ember/runloop';
-import { assert } from '@ember/debug';
 
 /**
  * Modal dialog component leverages the -in-element helper 
@@ -28,7 +27,7 @@ export default class ModalDialogComponent extends Component {
   get guid(){
     const id = this.args.id;
     if (this.modal.isRegistered(id)) {
-      console.warn(`Modal service already has an modal regsitered under the id: ${id}`);
+      console.warn(`Modal service already has a modal-dialog registered under the id: ${id}`);
     }
     return id || 'modal-' + guidFor(this);
   }

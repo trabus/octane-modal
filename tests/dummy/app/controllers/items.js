@@ -10,7 +10,6 @@ export default class ItemsController extends Controller {
 
   @action
   doThing(modal) {
-    console.log('do a thing')
     this.didThing = "did a thing!";
     // close via global action with modal guid
     this.modal.closeModal(modal.guid);

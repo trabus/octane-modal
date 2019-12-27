@@ -69,13 +69,13 @@ Sometimes it is necessary to chain multiple modals in sequnce (in a wizard for i
   onCloseModal() {
     this.modal.openModal("otherModal");
   }
-  
+
 // template
 <button type="button" {{on "click" (fn this.modal.openModal "myModal")}}>open</button>
 <ModalDialog @id="myModal" @onClose={{this.onCloseModal}} >
   This modal will open otherModal when closed
 </ModalDialog>
-<ModalDialog @id="otherModal >
+<ModalDialog @id="otherModal" >
   This modal will open when myModal closes
 </ModalDialog>
 ```

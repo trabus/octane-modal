@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { assert } from '@ember/debug';
 
 /**
  * Provides registry to track currently rendered modals
@@ -72,9 +73,12 @@ export default class ModalService extends Service {
    */
   @action
   register(id, item) {
-    if (!this._registry.has(id)) {
+    // if (!this.isRegistered(id)) {
+      assert(`Could not register modal-dialog:${id}. The modal service already has a modal-dialog registered under the id: ${id}. Check your templates for duplicate <ModalDialog @id="${id}" ></ModalDialog> instances.`, !this.isRegistered(id))
       this._registry.set(id, item);
-    }
+    // } else {
+    //   console.warn(`Modal-Dialog was not registered. The modal service already has a modal-dialog registered under the id: ${id}`);
+    // }
   }
 
   /**
@@ -83,7 +87,7 @@ export default class ModalService extends Service {
    */
   @action
   unregister(id) {
-    if (this._registry.has(id)) {
+    if (this.isRegistered(id)) {
       this._registry.delete(id);
     }
   }
