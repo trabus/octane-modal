@@ -51,6 +51,9 @@ export default class ModalDialogComponent extends Component {
     return typeof this.args.showCloseButton !== 'undefined' ? this.args.showCloseButton : true;
   }
 
+  /**
+   * Handle background click, gated by isBackdropClickable
+   */
   @action
   onBackgroundClick() {
     if (this.isBackdropClickable) {
@@ -58,6 +61,9 @@ export default class ModalDialogComponent extends Component {
     }
   }
 
+  /**
+   * Handle closing modal, executing onClose after
+   */
   @action
   closeModal() {
     this.isOpen=false;

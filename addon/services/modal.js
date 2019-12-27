@@ -10,10 +10,13 @@ export default class ModalService extends Service {
     super(...arguments)
     this._registry = new Map();
   }
+  /**
+   * Target element to render modal into using -in-element helper
+   */
   @tracked targetElement = null;
 
   /**
-   * open a specific modal-dialog that has registered with modal service
+   * Open a specific modal-dialog that has registered with modal service
    * @param {String} id
    */
   @action
@@ -23,7 +26,7 @@ export default class ModalService extends Service {
     // open 
     item && item.openModal();
     if (!this.targetElement) {
-      console.warn('The modal could not be opened, as there is no targetElement to render into. Please add a `<ModalTarget />` element somewhere where it is rendered at the same time as the intended modal. Use the `application.hbs` for modals invoked through the service.')
+      console.warn('The modal could not be opened, there is no targetElement to render into. Please add a `<ModalTarget />` element somewhere where it is rendered at the same time as the intended modal. To ensure a target is always present, use the `application.hbs` for modals invoked through the service.')
     }
     if (!item) {
       if (typeof id !== 'string') {
@@ -34,7 +37,8 @@ export default class ModalService extends Service {
     }
   }
   /**
-   * Close modal by id
+   * Close a specific modal-dialog by id
+   * If the id === "all", any open modals will be closed
    * @param {String} id 
    */
   @action
@@ -62,7 +66,7 @@ export default class ModalService extends Service {
   }
 
   /**
-   * 
+   * Registers a modal-dialog instance by id
    * @param {String} id 
    * @param {ModalDialog} item 
    */
@@ -73,6 +77,10 @@ export default class ModalService extends Service {
     }
   }
 
+  /**
+   * Unregisters a modal-dialog instance by id
+   * @param {String} id 
+   */
   @action
   unregister(id) {
     if (this._registry.has(id)) {
