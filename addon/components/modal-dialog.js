@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { guidFor } from '@ember/object/internals';
 import { later } from '@ember/runloop';
+import { assert } from '@ember/debug';
 
 /**
  * Modal dialog component leverages the -in-element helper 
@@ -12,11 +13,29 @@ import { later } from '@ember/runloop';
  * targetElement provided from the modal service.
  */
 export default class ModalDialogComponent extends Component {
+  /**
+   * modal service
+   */
+  @service modal;
 
-  @tracked isOpen = true;
+  @tracked isOpen = false;
   @tracked targetElement = null;
   closeDuration = 250;
 
+  /**
+   * 
+   */
+  get guid(){
+    const id = this.args.id;
+    if (this.modal.isRegistered(id)) {
+      console.warn(`Modal service already has an modal regsitered under the id: ${id}`);
+    }
+    return id || 'modal-' + guidFor(this);
+  }
+
+  /**
+   * determine if the backdrop element is clickable
+   */
   get isBackdropClickable() {
     // if undefined, send default
     return typeof this.args.isBackdropClickable !== 'undefined' ? this.args.isBackdropClickable : true;
@@ -32,11 +51,6 @@ export default class ModalDialogComponent extends Component {
     return typeof this.args.showCloseButton !== 'undefined' ? this.args.showCloseButton : true;
   }
 
-  get guid(){
-    return this.args.id || 'modal-' + guidFor(this);
-  }
-
-  @service modal;
   @action
   onBackgroundClick() {
     if (this.isBackdropClickable) {
