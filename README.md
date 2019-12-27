@@ -7,7 +7,7 @@ octane-modal
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.8 or above
+* Ember.js v3.13 or above (until `ember-component-template-polyfill` is available)
 * Ember CLI v2.13 or above
 * Node.js v8 or above
 

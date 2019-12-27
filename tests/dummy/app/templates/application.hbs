@@ -3,4 +3,4 @@
 {{outlet}}
 <button type="button" {{on "click" (fn this.modal.openModal "test0")}}>open0</button>
 <ModalDialog @id="test0" @onClose={{this.onCloseModal}}>This is root modal content, it will open modal1 on close when on the index page.</ModalDialog>
-<ModalDialog @id="test0" @onClose={{this.onCloseModal}}>This is root modal content, it will open modal1 on close when on the index page.</ModalDialog>
+{{!-- <ModalDialog @id="test0" @onClose={{this.onCloseModal}}>This is root modal content, it will open modal1 on close when on the index page.</ModalDialog> --}}

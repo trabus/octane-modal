@@ -25,11 +25,7 @@ export default class ModalDialogComponent extends Component {
    * 
    */
   get guid(){
-    const id = this.args.id;
-    if (this.modal.isRegistered(id)) {
-      console.warn(`Modal service already has a modal-dialog registered under the id: ${id}`);
-    }
-    return id || 'modal-' + guidFor(this);
+    return this.args.id || 'modal-' + guidFor(this);
   }
 
   /**
