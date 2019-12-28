@@ -3,11 +3,11 @@
   {{#-in-element this.targetElement}}
     <div class="modal-container {{if this.isOpen "open" "close"}}" tabindex="-1">
       {{#if this.showBackdrop}}
-        <div class="modal-background" tabindex={{if this.isBackdropClickable "0" "-1"}} {{on "click" this.onBackgroundClick}}></div>
+        <div data-modal-backdrop class="modal-backdrop" tabindex={{if this.isBackdropClickable "0" "-1"}} {{on "click" this.onBackgroundClick}}></div>
       {{/if}}
       <div class="modal-dialog" tabindex="-1" aria-modal="true" role="dialog">
         {{#if this.showCloseButton}}
-          <button type="button" class="close-modal" aria-label="Close" {{on "click" this.closeModal}}>
+          <button type="button" data-close-modal-dialog class="close-modal" aria-label="Close" {{on "click" this.closeModal}}>
             <XIcon />
           </button>
         {{/if}}
