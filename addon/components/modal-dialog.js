@@ -47,7 +47,7 @@ export default class ModalDialogComponent extends Component {
   }
 
   get canOpen() {
-    return typeof this.args.canOpen !== 'undefined' ? this.args.canOpen(this) : true;
+    return typeof this.args.canOpen !== 'undefined' ? this.args.canOpen : true;
   }
   /**
    * Handle background click, gated by isBackdropClickable

@@ -3,13 +3,8 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop'
 
-export default class ModalAutoLaunchModifier extends Modifier {
+export default class ModalAutoOpenModifier extends Modifier {
   @service modal;
-
-  get openIf() {
-    const { canOpen } = this.args.named;
-    return typeof canOpen === 'undefined' || canOpen;
-  }
 
   @action
   openModal() {
@@ -18,6 +13,6 @@ export default class ModalAutoLaunchModifier extends Modifier {
   }
 
   didReceiveArguments() {
-    this.openIf && scheduleOnce('afterRender', this, this.openModal);
+    scheduleOnce('afterRender', this, this.openModal);
   }
 }

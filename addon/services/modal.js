@@ -28,7 +28,7 @@ export default class ModalService extends Service {
     const item = this._registry.get(id);
     // open 
     if (item && !item.canOpen) {
-      developerLog(`The modal-dialog ${id} could not be opened, the canOpen condition required to open failed.`);
+      developerLog(`The modal-dialog ${id} could not be opened, its canOpen property is false.`);
       return false;
     }
     item && item.openModal();
