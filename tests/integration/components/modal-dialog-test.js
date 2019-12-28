@@ -20,7 +20,7 @@ module('Integration | Component | modal-dialog', function(hooks) {
       <ModalTarget />
     `);
     await click('[data-test-open-button]');
-    assert.dom(this.element).hasText('open x template block text');
+    assert.dom(this.element).hasText('open template block text');
   });
 
   test('it yields prepped closeModal action', async function(assert) {
@@ -34,7 +34,7 @@ module('Integration | Component | modal-dialog', function(hooks) {
     `);
     
     await click('[data-test-open-button]');
-    assert.dom(this.element).hasText('open x template block text close');
+    assert.dom(this.element).hasText('open template block text close');
 
     await click('[data-test-close-button]');
     assert.dom(this.element).hasText('open');

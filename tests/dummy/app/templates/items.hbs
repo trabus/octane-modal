@@ -8,6 +8,7 @@
 <button type="button" {{on "click" (fn this.modal.openModal "test2")}}>open2</button>
 <button type="button" {{on "click" (fn this.modal.openModal)}}>open3</button>
 
+<div {{modal-auto-launch "test2" canOpen=this.canAutoOpen}}></div>
 <ModalDialog @id="test1" as |modal|>
   <div>This is modal1 content</div>
   <button type="button" {{on "click" (fn this.doThing modal.modal)}}>Do thing</button>
@@ -15,8 +16,7 @@
   <button type="button" {{on "click" modal.closeModal}}>Local Cancel</button>
   <button type="button" {{on "click" (fn this.modal.closeModal "test1")}}>Global Cancel</button>
 </ModalDialog>
-
-<ModalDialog @id="test2">This is modal2 content</ModalDialog>
+<ModalDialog @id="test2" @onOpen={{this.onAutoOpen}}>This is modal2 content</ModalDialog>
 
 <ModalDialog @id="test3" @showCloseButton={{false}} @isBackdropClickable={{false}} as |modal|>
   <div>

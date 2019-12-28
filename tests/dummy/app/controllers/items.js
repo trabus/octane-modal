@@ -7,6 +7,16 @@ export default class ItemsController extends Controller {
   @service modal;
 
   @tracked didThing = "not yet.";
+  @tracked hasOpened = false;
+
+  get canAutoOpen() {
+    return !this.hasOpened;
+  }
+
+  @action
+  onAutoOpen() {
+    this.hasOpened = true;
+  }
 
   @action
   doThing(modal) {

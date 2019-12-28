@@ -9,4 +9,5 @@ module('Unit | Service | modal', function(hooks) {
     let service = this.owner.lookup('service:modal');
     assert.ok(service);
   });
+  
 });

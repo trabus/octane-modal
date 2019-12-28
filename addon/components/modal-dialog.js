@@ -76,6 +76,9 @@ export default class ModalDialogComponent extends Component {
   @action
   openModal() {
     this.isOpen = true;
+    if (this.args.onOpen) {
+      this.args.onOpen();
+    }
     this.targetElement = this.modal.targetElement;
   }
 }

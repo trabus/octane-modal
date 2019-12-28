@@ -8,7 +8,7 @@
       <div class="modal-dialog" tabindex="-1" aria-modal="true" role="dialog">
         {{#if this.showCloseButton}}
           <button type="button" class="close-modal" aria-label="Close" {{on "click" this.closeModal}}>
-            x
+            <XIcon />
           </button>
         {{/if}}
         {{yield (hash modal=this closeModal=(fn this.closeModal this))}}
