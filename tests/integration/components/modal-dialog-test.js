@@ -105,4 +105,44 @@ module('Integration | Component | modal-dialog', function(hooks) {
     await click('[data-modal-backdrop]');
     assert.dom('[data-test-content]').isNotVisible();
   });
+
+  test('showBackdrop', async function(assert) {
+    this.set('showBackdrop', false);
+    await render(hbs`
+      <button type="button" data-test-open-button {{on "click" (fn this.modal.openModal "test")}}>open</button>
+      <ModalDialog data-test-modal-dialog @id="test" @showBackdrop={{this.showBackdrop}}>
+        <div data-test-content>template block text</div>
+      </ModalDialog>
+      <ModalTarget />
+    `);
+    await click('[data-test-open-button]');
+    assert.dom('[data-modal-backdrop]').isNotVisible();
+
+    this.set('showBackdrop', true);
+    assert.dom('[data-modal-backdrop]').isVisible();
+    assert.dom('[data-test-content]').isVisible();
+    
+    await click('[data-modal-backdrop]');
+    assert.dom('[data-test-content]').isNotVisible();
+  });
+
+  test('showCloseButton', async function(assert) {
+    this.set('showCloseButton', false);
+    await render(hbs`
+      <button type="button" data-test-open-button {{on "click" (fn this.modal.openModal "test")}}>open</button>
+      <ModalDialog data-test-modal-dialog @id="test" @showCloseButton={{this.showCloseButton}}>
+        <div data-test-content>template block text</div>
+      </ModalDialog>
+      <ModalTarget />
+    `);
+    await click('[data-test-open-button]');
+    assert.dom('[data-close-modal-dialog]').isNotVisible();
+
+    this.set('showCloseButton', true);
+    assert.dom('[data-close-modal-dialog]').isVisible();
+    assert.dom('[data-test-content]').isVisible();
+    
+    await click('[data-close-modal-dialog]');
+    assert.dom('[data-test-content]').isNotVisible();
+  });
 });
