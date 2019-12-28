@@ -7,6 +7,7 @@
 <button type="button" {{on "click" (fn this.modal.openModal "test1")}}>open1</button>
 <button type="button" {{on "click" (fn this.modal.openModal "test2")}}>open2</button>
 <button type="button" {{on "click" (fn this.modal.openModal)}}>open3</button>
+<button type="button" {{on "click" (fn this.modal.openModal "test4")}}>open4</button>
 
 <div {{modal-auto-launch "test2" canOpen=this.canAutoOpen}}></div>
 <ModalDialog @id="test1" as |modal|>
@@ -20,7 +21,7 @@
 
 <ModalDialog @id="test3" @showCloseButton={{false}} @isBackdropClickable={{false}} as |modal|>
   <div>
-    Automatically opened modal3 for items route
+    Automatically opened modal3 for items route. only dismissable by button
   </div>
   <button type="button" {{on "click" modal.closeModal}}>Dismiss</button>
 </ModalDialog>

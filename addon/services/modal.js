@@ -3,6 +3,7 @@ import Service from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
+import developerLog from 'octane-modal/utils/developer-log';
 
 /**
  * Provides registry to track currently rendered modals
@@ -28,13 +29,13 @@ export default class ModalService extends Service {
     // open 
     item && item.openModal();
     if (!this.targetElement) {
-      console.warn('The modal could not be opened, there is no targetElement to render into. Please add a `<ModalTarget />` element somewhere where it is rendered at the same time as the intended modal. To ensure a target is always present, use the `application.hbs` for modals invoked through the service.')
+      developerLog(`The modal-dialog ${id} could not be opened, there is no targetElement to render into. Please add a \`<ModalTarget />\` element somewhere where it is rendered at the same time as the intended modal. To ensure a target is always present, use the \`application.hbs\` for modals invoked through the service.`)
     }
     if (!item) {
       if (typeof id !== 'string') {
-        console.warn('The modal service `openModal` action requires a string id to look up a currently registered modal instance. Please check that an id is passed as a string.');
+        developerLog('The modal service `openModal` action requires a string id to look up a currently registered modal instance. Please check that an id is passed as a string.');
       } else {
-        console.warn(`The modal ${id} does not exist or has not registered with the modal service. Please check to see if the modal is currently rendered in the current route or parent(s).`);
+        developerLog(`The modal-dialog ${id} does not exist or has not registered with the modal service. Please check to see if the modal is currently rendered in the current route or parent(s).`);
       }
     }
   }
@@ -74,12 +75,9 @@ export default class ModalService extends Service {
    */
   @action
   register(id, item) {
-    // if (!this.isRegistered(id)) {
-      assert(`Could not register modal-dialog:${id}. The modal service already has a modal-dialog registered under the id: ${id}. Check your templates for duplicate <ModalDialog @id="${id}" ></ModalDialog> instances.`, !this.isRegistered(id))
-      this._registry.set(id, item);
-    // } else {
-    //   console.warn(`Modal-Dialog was not registered. The modal service already has a modal-dialog registered under the id: ${id}`);
-    // }
+    // throw an error if we've got a duplicate
+    assert(`Could not register modal-dialog:${id}. The modal service already has a modal-dialog registered under the id: ${id}. Check your templates for duplicate <ModalDialog @id="${id}" ></ModalDialog> instances.`, !this.isRegistered(id))
+    this._registry.set(id, item);
   }
 
   /**
