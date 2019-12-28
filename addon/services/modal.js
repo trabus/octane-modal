@@ -27,6 +27,10 @@ export default class ModalService extends Service {
     // get modal-dialog instance from registry
     const item = this._registry.get(id);
     // open 
+    if (item && !item.canOpen) {
+      developerLog(`The modal-dialog ${id} could not be opened, the canOpen condition required to open failed.`);
+      return false;
+    }
     item && item.openModal();
     if (!this.targetElement) {
       developerLog(`The modal-dialog ${id} could not be opened, there is no targetElement to render into. Please add a \`<ModalTarget />\` element somewhere where it is rendered at the same time as the intended modal. To ensure a target is always present, use the \`application.hbs\` for modals invoked through the service.`)

@@ -10,7 +10,7 @@
 <button type="button" {{on "click" (fn this.modal.openModal "test4")}}>open4</button>
 
 <div {{modal-auto-launch "test2" canOpen=this.canAutoOpen}}></div>
-<ModalDialog @id="test1" as |modal|>
+<ModalDialog @id="test1" @canOpen={{this.canOpenModal1}} as |modal|>
   <div>This is modal1 content</div>
   <button type="button" {{on "click" (fn this.doThing modal.modal)}}>Do thing</button>
   <button type="button" {{on "click" (fn this.undoThing modal.modal)}}>Undo thing</button>

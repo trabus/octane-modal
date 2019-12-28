@@ -88,6 +88,26 @@ module('Integration | Component | modal-dialog', function(hooks) {
     assert.ok(this.hasOpened);
   });
 
+  test('it has a canOpen check to prevent it from opening', async function(assert) {
+    this.set('canOpenModal', false);
+    this.set('canOpen', () => {
+      return this.canOpenModal;
+    });
+    await render(hbs`
+      <button type="button" data-test-open-button {{on "click" (fn this.modal.openModal "test")}}>open</button>
+      <ModalDialog data-test-modal-dialog @id="test" @canOpen={{this.canOpen}}>
+        <div data-test-content>template block text</div>
+      </ModalDialog>
+      <ModalTarget />
+    `);
+    await click('[data-test-open-button]');
+    assert.dom('[data-test-content]').isNotVisible();
+
+    this.set('canOpenModal', true);
+    await click('[data-test-open-button]');
+    assert.dom('[data-test-content]').isVisible();
+  });
+
   test('shouldisBackdropClickable', async function(assert) {
     this.set('isBackdropClickable', false);
     await render(hbs`

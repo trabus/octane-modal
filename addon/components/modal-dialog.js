@@ -46,6 +46,9 @@ export default class ModalDialogComponent extends Component {
     return typeof this.args.showCloseButton !== 'undefined' ? this.args.showCloseButton : true;
   }
 
+  get canOpen() {
+    return typeof this.args.canOpen !== 'undefined' ? this.args.canOpen(this) : true;
+  }
   /**
    * Handle background click, gated by isBackdropClickable
    */
@@ -75,6 +78,7 @@ export default class ModalDialogComponent extends Component {
    */
   @action
   openModal() {
+    // modal service checks canOpen status before invoking this
     this.isOpen = true;
     if (this.args.onOpen) {
       this.args.onOpen();

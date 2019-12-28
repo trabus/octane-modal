@@ -12,6 +12,10 @@ export default class ItemsController extends Controller {
   get canAutoOpen() {
     return !this.hasOpened;
   }
+  @action
+  canOpenModal1() {
+    return this.didThing !== 'did a thing!';
+  }
 
   @action
   onAutoOpen() {
