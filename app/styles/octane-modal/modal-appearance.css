@@ -1,0 +1,14 @@
+.modal-backdrop {
+  background-color: white;
+  opacity: .8;
+}
+.modal-dialog {
+  border: 1px solid grey;
+  background-color: white;
+  padding: 1rem 3rem 0.5rem 2rem;
+  outline: none;
+}
+.modal-dialog .close-modal {
+  outline: none;
+  border: none;
+}

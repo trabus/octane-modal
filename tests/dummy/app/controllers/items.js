@@ -40,4 +40,9 @@ export default class ItemsController extends Controller {
     // close via modal action
     modal.closeModal();
   }
+  
+  @action
+  disabledBackgroundClick() {
+    alert('background click disabled');
+  }
 }

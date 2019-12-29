@@ -59,7 +59,7 @@ module('Integration | Component | modal-dialog', function(hooks) {
       assert.ok('onClose called');
     })
     await render(hbs`
-      <button type="button" data-test-open-button {{on "click" (fn this.modal.openModal "test")}}>open</button>
+      <button type="button" data-test-open-button {{modal-open "test"}}>open</button>
       <ModalDialog data-test-modal-dialog @id="test" @onClose={{this.onClose}}>
         template block text
       </ModalDialog>
@@ -78,7 +78,7 @@ module('Integration | Component | modal-dialog', function(hooks) {
       assert.ok('onOpen called');
     })
     await render(hbs`
-      <button type="button" data-test-open-button {{on "click" (fn this.modal.openModal "test")}}>open</button>
+      <button type="button" data-test-open-button {{modal-open "test"}}>open</button>
       <ModalDialog data-test-modal-dialog @id="test" @onOpen={{this.onOpen}}>
         template block text
       </ModalDialog>
@@ -88,14 +88,11 @@ module('Integration | Component | modal-dialog', function(hooks) {
     assert.ok(this.hasOpened);
   });
 
-  test('it has a canOpen check to prevent it from opening', async function(assert) {
+  test('it has canOpen check to prevent it from opening', async function(assert) {
     this.set('canOpenModal', false);
-    this.set('canOpen', () => {
-      return this.canOpenModal;
-    });
     await render(hbs`
-      <button type="button" data-test-open-button {{on "click" (fn this.modal.openModal "test")}}>open</button>
-      <ModalDialog data-test-modal-dialog @id="test" @canOpen={{this.canOpen}}>
+      <button type="button" data-test-open-button {{modal-open "test"}}>open</button>
+      <ModalDialog data-test-modal-dialog @id="test" @canOpen={{this.canOpenModal}}>
         <div data-test-content>template block text</div>
       </ModalDialog>
       <ModalTarget />
@@ -108,10 +105,10 @@ module('Integration | Component | modal-dialog', function(hooks) {
     assert.dom('[data-test-content]').isVisible();
   });
 
-  test('shouldisBackdropClickable', async function(assert) {
+  test('isBackdropClickable', async function(assert) {
     this.set('isBackdropClickable', false);
     await render(hbs`
-      <button type="button" data-test-open-button {{on "click" (fn this.modal.openModal "test")}}>open</button>
+      <button type="button" data-test-open-button {{modal-open "test"}}>open</button>
       <ModalDialog data-test-modal-dialog @id="test" @isBackdropClickable={{this.isBackdropClickable}}>
         <div data-test-content>template block text</div>
       </ModalDialog>
@@ -124,6 +121,22 @@ module('Integration | Component | modal-dialog', function(hooks) {
     this.set('isBackdropClickable', true);
     await click('[data-modal-backdrop]');
     assert.dom('[data-test-content]').isNotVisible();
+  });
+
+  test('onBackdropClick', async function(assert) {
+    assert.expect(1);
+    this.set('onBackdropClick', () => {
+      assert.ok('clicked backdrop');
+    });
+    await render(hbs`
+      <button type="button" data-test-open-button {{modal-open "test"}}>open</button>
+      <ModalDialog data-test-modal-dialog @id="test" @onBackdropClick={{this.onBackdropClick}}>
+        <div data-test-content>template block text</div>
+      </ModalDialog>
+      <ModalTarget />
+    `);
+    await click('[data-test-open-button]');
+    await click('[data-modal-backdrop]');
   });
 
   test('showBackdrop', async function(assert) {

@@ -1,0 +1,40 @@
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-backdrop, .modal-container {
+  width: 100vw;
+  height: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.modal-dialog {
+  position: relative;
+  min-height: 2rem;
+  margin: 80px;
+  margin-top: -40%;
+}
+.modal-dialog .close-modal {
+  cursor: pointer;
+  position: absolute;
+  top: 0.4rem;
+  right: 0.5rem;
+}
+
+.modal-backdrop, .modal-container {
+  z-index: 100;
+}
+.modal-dialog {
+  z-index: 101;
+}
+
+.no-scroll {
+  position: fixed;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}

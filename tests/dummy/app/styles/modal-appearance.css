@@ -1,0 +1,8 @@
+.modal-backdrop {
+  background-color: light-green;
+}
+
+.modal-dialog {
+  background-color: light-green;
+  outline: blue;
+}

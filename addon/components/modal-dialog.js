@@ -53,9 +53,10 @@ export default class ModalDialogComponent extends Component {
    * Handle background click, gated by isBackdropClickable
    */
   @action
-  onBackgroundClick() {
+  _onBackdropClick() {
     if (this.isBackdropClickable) {
-      this.closeModal();
+      // if a user backdrop click action exists use instead of default
+      this.args.onBackdropClick ? this.args.onBackdropClick() : this.closeModal();
     }
   }
 

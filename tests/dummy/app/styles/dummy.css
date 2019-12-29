@@ -1,0 +1,30 @@
+@import "octane-modal/modal-animation.css";
+@import "octane-modal/modal-structure.css";
+@import "octane-modal/modal-appearance.css";
+
+body {
+  background-color: lightgray;
+}
+
+.top-corner {
+  width: 140px;
+  height: 30px;
+  background: gray;
+  color: white;
+  font-size: 12px;
+  position:absolute;
+  top: 0;
+  right: 0;
+}
+
+.red-modal .modal-dialog, .red-modal .modal-backdrop {
+  background-color: lightsalmon;
+}
+
+.modal-backdrop {
+  background-color: black;
+}
+
+.modal-dialog {
+  background-color: salmon;
+}
