@@ -1,25 +1,40 @@
-{{outlet}}
-<div>
-  Did a thing: {{this.didThing}}
-</div>
-<LinkTo @route="application">home</LinkTo>
+<h2>Items</h2>
+<ul>
+  <li>
+    open modal1 on open0 close: {{this.autoOpen1}}
+  </li>
+  <li>
+    didThing: {{this.didThing}}
+  </li>
+</ul>
+<ul>
+  <li>
+    auto-open
+    <button type="button" {{on "click" this.toggleAutoOpen1}}>Toggle AutoOpen1</button>
+    <button type="button" {{modal-open "test1"}}>open1</button>
+  </li>
+  <li>
+    auto-open once
+    <button type="button" {{on "click" (fn this.modal.openModal "test2")}}>open2</button>
+  </li>
+  <li>
+    bad targets
+    <button type="button" {{on "click" (fn this.modal.openModal)}}>no id</button>
+    <button type="button" {{modal-open "test4"}}>unregistered</button>
+  </li>
+</ul>
 
-<button type="button" {{modal-open "test1"}}>open1</button>
-<button type="button" {{on "click" (fn this.modal.openModal "test2")}}>open2</button>
-<button type="button" {{on "click" (fn this.modal.openModal)}}>open3</button>
-<button type="button" {{modal-open "test4"}}>open4</button>
-
-<div {{modal-auto-open "test2" }}></div>
+<div {{modal-auto-open "test2" canOpen=this.canAutoOpen}}></div>
 <ModalDialog @id="test1" @canOpen={{this.canOpenModal1}} as |modal|>
   <div>This is modal1 content</div>
-  <button type="button" {{on "click" (fn this.doThing modal.modal)}}>Do thing</button>
+  <button type="button" {{on "click" (fn this.doThing modal.modal)}}>Don't reopen</button>
   <button type="button" {{on "click" (fn this.undoThing modal.modal)}}>Undo thing</button>
   <button type="button" {{on "click" modal.closeModal}}>Local Cancel</button>
   <button type="button" {{on "click" (fn this.modal.closeModal "test1")}}>Global Cancel</button>
   <button type="button" {{modal-close "test1"}}>Modifier string Cancel</button>
   <button type="button" {{modal-close modal.modal}}>Modifier item Cancel</button>
 </ModalDialog>
-<ModalDialog @id="test2" @onOpen={{this.onAutoOpen}} @canOpen={{this.canAutoOpen}}>This is modal2 content</ModalDialog>
+<ModalDialog @id="test2" @onOpen={{this.onAutoOpen}}>This is modal2 content</ModalDialog>
 
 <ModalDialog @id="test3" @showCloseButton={{false}} @isBackdropClickable={{false}} as |modal|>
   <div>
@@ -28,4 +43,5 @@
   <button type="button" {{on "click" modal.closeModal}}>Dismiss</button>
 </ModalDialog>
 
+{{outlet}}
 <ModalTarget />

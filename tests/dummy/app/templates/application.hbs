@@ -1,6 +1,25 @@
-<h2 id="title">Welcome to Ember</h2>
+<h2 id="title">Octane Modal demo</h2> <div {{modal-open "root" event="mouseenter"}} style="width:140px; height: 30px; background: blue; color: white; font-size:12px; position:absolute; top:0; right: 0; ">This div opens the root modal on mouseenter event</div>
+
+<LinkTo @route="application">home</LinkTo>
 <LinkTo @route="items">items</LinkTo>
+
+<ul>
+  <li>
+    root <button type="button" {{modal-open "root"}}>Open Modal</button>
+  </li>
+  <li>
+    chain open <button type="button" {{modal-open "test0"}}>open0</button>
+  </li>
+</ul>
+
+<ModalDialog @id="root" as |m|>
+  <div>
+    This is the root modal example. Content, context, and actions are provided from the host.
+  </div>
+  <button type="button" {{modal-close m.modal.guid}}>Dismiss</button>
+</ModalDialog>
+
+<ModalDialog @id="test0" @onClose={{this.onCloseModal}}>This is modal0 content, it will open modal1 on close when on the items page.</ModalDialog>
+
 {{outlet}}
-<button type="button" {{on "click" (fn this.modal.openModal "test0")}}>open0</button>
-<ModalDialog @id="test0" @onClose={{this.onCloseModal}}>This is root modal content, it will open modal1 on close when on the items page.</ModalDialog>
-{{!-- <ModalDialog @id="test0" @onClose={{this.onCloseModal}}>This is root modal content, it will open modal1 on close when on the index page.</ModalDialog> --}}
+<ModalTarget />

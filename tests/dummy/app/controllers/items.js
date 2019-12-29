@@ -8,13 +8,18 @@ export default class ItemsController extends Controller {
 
   @tracked didThing = "not yet.";
   @tracked hasOpened = false;
+  @tracked autoOpen1 = true;
 
   get canAutoOpen() {
     return !this.hasOpened;
   }
   
   get canOpenModal1() {
-    return this.didThing !== 'did a thing!';
+    return this.autoOpen1;
+  }
+  @action
+  toggleAutoOpen1() {
+    this.autoOpen1 = !this.autoOpen1;
   }
 
   @action
