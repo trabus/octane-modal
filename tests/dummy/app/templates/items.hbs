@@ -18,9 +18,19 @@
     <button type="button" {{on "click" (fn this.modal.openModal "test2")}}>open2</button>
   </li>
   <li>
-    bad targets
-    <button type="button" {{on "click" (fn this.modal.openModal)}}>no id</button>
-    <button type="button" {{modal-open "test4"}}>unregistered</button>
+
+    bad open targets
+    <button type="button" {{on "click" this.modal.openModal}}>no id</button>
+    <button type="button" {{on "click" (fn this.modal.openModal "test4")}}>unregistered</button>
+    <button type="button" {{modal-open}}>modal-open no id</button>
+    <button type="button" {{modal-open "test4"}}>modal-open unregistered</button>
+  </li>
+  <li>
+    bad close targets
+    <button type="button" {{on "click" this.modal.closeModal}}>no id</button>
+    <button type="button" {{on "click" (fn this.modal.closeModal "test4")}}>unregistered</button>
+    <button type="button" {{modal-close}}>modal-close no id</button>
+    <button type="button" {{modal-close "test4"}}>modal-close unregistered</button>
   </li>
 </ul>
 

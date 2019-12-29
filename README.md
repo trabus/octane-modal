@@ -37,6 +37,7 @@ To launch a modal, simply create a `<ModalDialog>` component with a unique `@id`
 
 ```js
 <button type="button" {{on "click" (fn this.modal.openModal "myModal")}}>open</button>
+<button type="button" {{modal-open "myModal"}}>open</button>
 <ModalDialog @id="myModal" >
   Modal content
 </ModalDialog>

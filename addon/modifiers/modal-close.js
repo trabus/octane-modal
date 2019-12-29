@@ -1,5 +1,6 @@
 import Modifier from 'ember-modifier';
 import { inject as service } from '@ember/service';
+import developerLog from 'octane-modal/utils/developer-log';
 
 export default class ModalCloseModifier extends Modifier {
   @service modal;
@@ -33,6 +34,11 @@ export default class ModalCloseModifier extends Modifier {
 
   // lifecycle hooks
   didReceiveArguments() {
+    const [ modal ] = this.args.positional;
+    if (typeof modal === 'undefined') {
+      developerLog('Attempted to use a modal-close modifier without passing an id');
+      return;
+    }
     this.removeEventListener();
     this.addEventListener();
   }
