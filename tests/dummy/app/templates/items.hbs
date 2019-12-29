@@ -1,7 +1,7 @@
 <h2>Items</h2>
 <ul>
   <li>
-    open modal1 on open0 close: {{this.autoOpen1}}
+    modal1 canOpen: {{this.autoOpen1}}
   </li>
   <li>
     didThing: {{this.didThing}}
@@ -10,7 +10,7 @@
 <ul>
   <li>
     auto-open
-    <button type="button" {{on "click" this.toggleAutoOpen1}}>Toggle AutoOpen1</button>
+    <button type="button" {{on "click" this.toggleAutoOpen1}}>Toggle canOpen1</button>
     <button type="button" {{modal-open "test1"}}>open1</button>
   </li>
   <li>
