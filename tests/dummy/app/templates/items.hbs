@@ -27,7 +27,7 @@
 <div {{modal-auto-open "test2" canOpen=this.canAutoOpen}}></div>
 <ModalDialog @id="test1" @canOpen={{this.canOpenModal1}} as |modal|>
   <div>This is modal1 content</div>
-  <button type="button" {{on "click" (fn this.doThing modal.modal)}}>Don't reopen</button>
+  <button type="button" {{on "click" (fn this.doThing modal.modal)}}>Did thing</button>
   <button type="button" {{on "click" (fn this.undoThing modal.modal)}}>Undo thing</button>
   <button type="button" {{on "click" modal.closeModal}}>Local Cancel</button>
   <button type="button" {{on "click" (fn this.modal.closeModal "test1")}}>Global Cancel</button>
